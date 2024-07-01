@@ -1,14 +1,14 @@
 .container{
+   margin-top: 36px;
     display: flex;
     align-items: center;
     justify-content: center;
-    /* border: solid 1px black; */
-    width: 1100px;
-    margin: 4% 13%;
+    width: 100%;
+    height: 100%;
   }
 
 .main-section{
-    width: 100%;
+  width: 1100px;
 }
 
   .main-title{
@@ -22,7 +22,7 @@
   .tag{
     margin-left: 5px;
     padding: 1px 5px;
-    border-radius: 5px;
+    border-radius: 25px;
     background: rgb(86, 86, 86);
     display: flex;
     align-items: center;
