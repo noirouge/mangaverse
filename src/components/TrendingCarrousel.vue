@@ -53,15 +53,19 @@ views: trendingCarrouselData[0].views,
 cover: trendingCarrouselData[0].cover,
 });
 
-function carrouselScroll(args:any){
-console.log("carrouselScroll", args);
-};
+// function carrouselScroll(args:any){
+// console.log("carrouselScroll", args);
+// };
 
+function waka(){
+
+}
 
 onMounted(() => {
   carrouselImgContainer.value = document.getElementById('carrousel-img');
+  waka();
   // carrouselImgContainer.value.scrollLeft = 10;
-  carrouselImgContainer.value.onscroll = carrouselScroll;
+  // carrouselImgContainer.value.onscroll = carrouselScroll;
   // carrouselImgContainer.value.ondrag = (e: any) => onCarrouselMouseEvent("ondrag", e);
   // carrouselImgContainer.value
   console.log("MONTADO", carrouselImgContainer.value);
@@ -151,9 +155,15 @@ onMounted(() => {
 }
 
 .carrousel-content-info {
-  height: 80px;
-  margin-left: 10px;
-  color: rgb(211, 211, 211);
+  white-space: pre-wrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: 93px;
+    margin-left: 10px;
+    color: rgb(211, 211, 211);
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
 }
 
 .carrousel-content-points {
