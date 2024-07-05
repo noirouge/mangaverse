@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import TrendingCarrousel from "../components/TrendingCarrousel.vue"
+import PreviewContinueReading from "../components/PreviewContinueReading.vue"
 </script>
 
 <template>
@@ -11,6 +12,12 @@ import TrendingCarrousel from "../components/TrendingCarrousel.vue"
         </div>
         <div class="main-content">
           <TrendingCarrousel />
+        </div>
+        <div class="main-title">
+          CONTINUE READING
+        </div>
+        <div class="main-content">
+          <PreviewContinueReading />
         </div>
       </div>
     </div>
