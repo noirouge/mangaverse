@@ -3,7 +3,9 @@
   <div class="trending">
     <div  class="carrousel-container">
       <div v-for="trending of mainStore.trendingData" :key="trending.id" class="item" v-show="trending.id === mainStore.trendingDataSelected.id">
-        <img :src="trending.cover" :alt="trending.title">
+        <Transition name="slide-fade">
+          <img v-if="trending.id === mainStore.trendingDataSelected.id" :src="trending.cover" :alt="trending.title">
+        </Transition>
         <div class="overlay">
           <div class="tags">
             <div v-for="tag of trending.tags" :key="tag.name" class="tag" :style="{background: tag.color}">{{ tag.name }}</div>
@@ -35,24 +37,37 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, reactive, ref } from 'vue';
+import { onMounted, reactive, ref, onUnmounted } from 'vue';
 import TrendingCarrouselList from '../components/TrendingCarrouselList.vue';
 import useMainStore from "@/stores/useMainStore.ts";
 const mainStore = useMainStore();
 // function carrouselScroll(args:any){
 // console.log("carrouselScroll", args);
 // };
-const waka = ref(1);
-
 // function waka(){
 
 // }
+let carrouselInterval:any;
+function setCarouselInterval(){
+  let turn = 0;
+carrouselInterval = setInterval(() => {
+  if(turn < 4){
+    turn++;
+  }else turn = 0;
+  mainStore.selectTrending(turn);
+}, 5000);
+};
+
 
 onMounted(async () => {
   await mainStore.getTrendingData();
   console.log("WAKA", mainStore.trendingData);
+  setCarouselInterval();
 });
 
+onUnmounted(() => {
+clearInterval(carrouselInterval);
+});
 
 
 
@@ -153,5 +168,21 @@ onMounted(async () => {
     height: 100%;
     width: 100%;
   }
+
+  .slide-fade-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
+
 /* CARROUSEL-MOBILE-VERSION:END */
 </style>
