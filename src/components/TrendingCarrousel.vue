@@ -1,34 +1,33 @@
 <template>
-  <div class="trending">
-    <div class="trending-carrousel">
-      <div class="carrousel-img" id="carrousel-img">
-        <div class="img" v-for="item in trendingCarrouselData" :key="item.id">
-          <img :alt="item.title" :src="item.cover" />
-        </div>
-      </div>
-      <div class="carrousel-overlay">
-        <div class="carrousel-content">
-          <div class="carrousel-content-tags">
-            <div v-for="tag,index of trendingSelected.tags" :key="tag.name" class="tag" style="background: #1464FF; margin-left: 0;" :style="{background: tag.color, 'margin-left': (!index?0:'10px')}">{{ tag.name }}</div>
-          </div>
-          <div class="carrousel-content-title">
-           {{ trendingSelected.title }}
-          </div>
-          <div class="carrousel-content-chapters">
-            Chapters: {{ trendingSelected.chapters }}
-          </div>
-          <div class="carrousel-content-info">
-            {{ trendingSelected.description }}
-          </div>
-          <div class="carrousel-content-points" style="padding-left: 0">
-            <div class="carrousel-content-point" :class="{selected: trendingSelected.id === 1}"></div>
-            <div class="carrousel-content-point" :class="{selected: trendingSelected.id === 2}"></div>
-            <div class="carrousel-content-point" :class="{selected: trendingSelected.id === 3}"></div>
-            <div class="carrousel-content-point" :class="{selected: trendingSelected.id === 4}"></div>
-            <div class="carrousel-content-point" :class="{selected: trendingSelected.id === 5}"></div>
 
+  <div class="trending">
+    <div  class="carrousel-container">
+      <div v-for="trending of mainStore.trendingData" :key="trending.id" class="item" v-show="trending.id === mainStore.trendingDataSelected.id">
+        <img :src="trending.cover" :alt="trending.title">
+        <div class="overlay">
+          <div class="tags">
+            <div v-for="tag of trending.tags" :key="tag.name" class="tag" :style="{background: tag.color}">{{ tag.name }}</div>
           </div>
+          <div class="title">
+            {{ trending.title }}
+          </div>
+          <div class="chapters">
+             Chapters: {{ trending.chapters }}
+          </div>
+          <div class="description">
+            {{ trending.description }}
+          </div>
+          
         </div>
+        
+      </div>
+      <div class="options" >
+      <div class="option" 
+      v-for="trending, index of mainStore.trendingData" 
+      :key="trending.id" 
+      :class="{active: trending.id === mainStore.trendingDataSelected.id}"
+      @click="mainStore.selectTrending(index)"
+      ></div>
       </div>
     </div>
     <TrendingCarrouselList />
@@ -37,171 +36,122 @@
 
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue';
-import TrendingCarrouselList from '../components/TrendingCarrouselList.vue'
-import useExampleData from '../core/example/useExampleData.ts'
-const { trendingCarrouselData } = useExampleData();
-const carrouselImgContainer = ref<any>(null);
-const trendingSelected = reactive({
-id: trendingCarrouselData[0].id,
-chapters: trendingCarrouselData[0].chapters,
-description: trendingCarrouselData[0].description,
-portrait: trendingCarrouselData[0].portrait,
-stars: trendingCarrouselData[0].stars,
-tags: trendingCarrouselData[0].tags,
-title: trendingCarrouselData[0].title,
-views: trendingCarrouselData[0].views,
-cover: trendingCarrouselData[0].cover,
-});
-
+import TrendingCarrouselList from '../components/TrendingCarrouselList.vue';
+import useMainStore from "@/stores/useMainStore.ts";
+const mainStore = useMainStore();
 // function carrouselScroll(args:any){
 // console.log("carrouselScroll", args);
 // };
+const waka = ref(1);
 
-function waka(){
+// function waka(){
 
-}
+// }
 
-onMounted(() => {
-  carrouselImgContainer.value = document.getElementById('carrousel-img');
-  waka();
-  // carrouselImgContainer.value.scrollLeft = 10;
-  // carrouselImgContainer.value.onscroll = carrouselScroll;
-  // carrouselImgContainer.value.ondrag = (e: any) => onCarrouselMouseEvent("ondrag", e);
-  // carrouselImgContainer.value
-  console.log("MONTADO", carrouselImgContainer.value);
+onMounted(async () => {
+  await mainStore.getTrendingData();
+  console.log("WAKA", mainStore.trendingData);
 });
+
+
+
 
 </script>
 
 <style scoped>
 /* CARROUSEL:BEGIN */
-.trending {
+
+
+
+.trending{
   display: flex;
+  /* width: 100vh; */
 }
 
-.trending-carrousel {
-
-  display: flex;
-  width: 800px;
-  height: 450px;
-}
-
-.carrousel-img {
-  overflow: hidden;
-  display: flex;
-  width: 790px;
-  height: 449px;
-  border-radius: 25px;
-  border-left: solid 3px rgba(0, 0, 0, 0.495);
-  border-bottom: solid 5px rgba(0, 0, 0, 0.705);
-}
-
-.carrousel-img .img {
-  position: relative;
-  left: 0px;
-  width: 796px;
-  height: 450px;
-}
-
-.carrousel-img img {
-  height: 450px;
-  width: max-content;
-  border-radius: 25px;
-  border-left: solid 3px rgba(0, 0, 0, 0.495);
-  border-bottom: solid 5px rgba(0, 0, 0, 0.705);
-}
-
-.carrousel-overlay {
-  pointer-events: none;
-  position: absolute;
-  height: 450px;
-  align-content: flex-end;
-}
-
-.carrousel-content {
-  padding-bottom: 10px;
-  border-radius: 0 0 25px 25px;
-  height: 235px;
-  width: 795px;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.662), rgba(0, 0, 0, 0.849), black);
-  align-content: flex-end;
-}
-
-/* .carrousel-content *{
-  margin-left: 10px;
-} */
-
-.carrousel-content-title {
-  white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 58%;
-    margin-left: 10px;
-    font-size: 28px;
-    /* font-weight: bold; */
-    font-family: 'Trade Winds';
-}
-
-.carrousel-content-chapters {
-  margin-left: 10px;
-  font-size: 15px;
-  font-family: 'Times New Roman', Times, serif;
-  font-weight: bold;
-  color: #ffffffc7;
-  width: fit-content;
-  padding: 1px 5px;
-  border-radius: 25px;
-  background: rgb(255 255 255 / 14%);
-}
-
-.carrousel-content-info {
-  white-space: pre-wrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    height: 93px;
-    margin-left: 10px;
-    color: rgb(211, 211, 211);
-    display: -webkit-box;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
-}
-
-.carrousel-content-points {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.carrousel-content-point {
-  background: #6d6d6d80;
-  margin-left: 5px;
-  height: 10px;
-  width: 10px;
-  border-radius: 50px;
-}
-
-.carrousel-content-point.selected {
-  background: rgba(255, 255, 0, 0.516);
-}
-
-.carrousel-content-tags {
-  margin-left: 10px;
-  display: flex;
-}
-
-/* .trending-carrousel img {
-  width: max-content;
+  .carrousel-container{
+    display: flex;
+    border-left: 5px solid #0000009c;
+    border-bottom: 4px solid #0000009c;
     border-radius: 25px;
-    border-left: solid 3px rgba(0, 0, 0, 0.495);
-    border-bottom: solid 5px rgba(0, 0, 0, 0.705);
-} */
-
-/* CARROUSEL:END */
-/* CARROUSEL-MOBILE-VERSION:BEGIN */
-@media only screen and (max-width: 600px){
-  .carrousel-img{
-    overflow: auto;
+    height: 460px;
+    width: 800px;
+    position: relative;
+    overflow: hidden;
   }
-}
+
+  .carrousel-container .options{
+    width: 100%;
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+  }
+  .carrousel-container .options .option{
+    margin: 8px;
+    border-radius: 50%;
+    background: #b3b3b3;
+    width: 10px;
+    height: 10px;
+    cursor: pointer;
+  }
+  .carrousel-container .options .option:hover{
+    background: #ffffff;
+    width: 12px;
+    height: 12px;
+  }
+
+
+  .carrousel-container .options .option.active{
+    background: yellow;
+  }
+
+  .carrousel-container .overlay{
+    padding-left: 33px;
+    position: absolute;
+    height: 222px;
+    display: flex;
+    width: 100%;
+    bottom: 0;
+    background: linear-gradient(to top, black, #000000ed, #000000e3, #000000d4, #000000ba, #000000a6, #0000007a, transparent);
+    flex-direction: column;
+  }
+
+  .carrousel-container .overlay .tags{
+    display: flex;
+    margin-top: 40px;
+  }
+
+  .carrousel-container .overlay .title{
+    font-size: 30px;
+    font-family: Trade Winds;
+  }
+
+  .carrousel-container .overlay .chapters{
+    color: #ffffff9e;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  
+  .carrousel-container .overlay .description{
+    width: 95%;
+    display: -webkit-box;          /* Soporte para navegadores WebKit */
+    -webkit-box-orient: vertical; /* Orientación del box en vertical */
+    -webkit-line-clamp: 4;        /* Número de líneas que quieres mostrar */
+    overflow: hidden;             /* Oculta el desbordamiento */
+    text-overflow: ellipsis;
+  }
+
+  .carrousel-container .item{
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+
+  .carrousel-container .item img{
+    height: 100%;
+    width: 100%;
+  }
 /* CARROUSEL-MOBILE-VERSION:END */
 </style>

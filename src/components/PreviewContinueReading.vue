@@ -1,6 +1,7 @@
 <template>
-    <div>
-        <img src="/src/assets/imgs/reading/sololeveling.jpg" width="200" height="300" />
+    <div class="preview-continue-reading">
+        <img src="/src/assets/imgs/reading/sololeveling.jpg" width="100%" />
+        <div class="background"></div>
     </div>
 <h1>WAKA</h1>
 </template>
@@ -13,6 +14,15 @@
 
 <style scoped>
 
+.background{
+    background: black;
+}
+
+.preview-continue-reading{
+    border-radius: 15px;
+    width: 300px;
+    height: 400px;
+}
 
 
 </style>
