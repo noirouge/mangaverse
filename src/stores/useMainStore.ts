@@ -25,7 +25,7 @@ const useMainStore = defineStore("useMainStore", () => {
 
     const trendingData = ref<ITrendingData[]>([]);
     const trendingDataSelected = ref<ITrendingData>(trendingData.value[0]);
-
+    const trendingTurn = ref(0);
     const getTrendingData = async () => {
         trendingData.value = trendingCarrouselData;
         trendingDataSelected.value = trendingData.value[0];
@@ -36,12 +36,14 @@ const useMainStore = defineStore("useMainStore", () => {
     };
 
     const selectTrending = (index: number) => {
-        trendingDataSelected.value = trendingData.value[index];
+        trendingTurn.value = index;
+        trendingDataSelected.value = trendingData.value[trendingTurn.value];
     };
 
 
 return{
     trendingData,
+    trendingTurn,
     trendingDataSelected,
     getTrendingData,
     cleanAllData,

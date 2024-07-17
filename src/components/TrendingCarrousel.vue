@@ -32,14 +32,40 @@
       ></div>
       </div>
     </div>
-    <TrendingCarrouselList />
+    <!-- <TrendingCarrouselList /> -->
+    <div class="carrousel-list-container">
+<div class="list-item" :class="{selected: trending.id === mainStore.trendingDataSelected.id}" v-for="trending, index of mainStore.trendingData" @click="mainStore.selectTrending(index)">
+  <div class="number">
+    {{ index + 1 }}
+  </div>
+  <img :src="trending.portrait" :alt="trending.title + ' portrait'">
+  <div class="info">
+    <div class="title">
+      {{ trending.title }}
+    </div>
+    <div class="rating">
+      <div class="views"><IconEye style="height: 75%;" /> {{ trending.views }}</div>
+      <div class="stars">
+<StarsHandler style="height: 75%;" />
+<StarsHandler style="height: 75%;" />
+<StarsHandler style="height: 75%;" />
+<StarsHandler style="height: 75%;" />
+<StarsHandler style="height: 75%;" />
+      </div>
+    </div>
+  </div>
+  <!-- <div class="list-item-selected" v-if="trending.id === mainStore.trendingDataSelected.id"></div> -->
+</div>
+
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { onMounted, reactive, ref, onUnmounted } from 'vue';
-import TrendingCarrouselList from '../components/TrendingCarrouselList.vue';
 import useMainStore from "@/stores/useMainStore.ts";
+import IconEye from '@/components/icons/IconEye.vue';
+import StarsHandler from '@/components/StarsHandler.vue';
 const mainStore = useMainStore();
 // function carrouselScroll(args:any){
 // console.log("carrouselScroll", args);
@@ -49,12 +75,11 @@ const mainStore = useMainStore();
 // }
 let carrouselInterval:any;
 function setCarouselInterval(){
-  let turn = 0;
 carrouselInterval = setInterval(() => {
-  if(turn < 4){
-    turn++;
-  }else turn = 0;
-  mainStore.selectTrending(turn);
+  if(mainStore.trendingTurn < 4){
+    mainStore.trendingTurn++;
+  }else mainStore.trendingTurn = 0;
+  mainStore.selectTrending(mainStore.trendingTurn);
 }, 5000);
 };
 
@@ -74,15 +99,96 @@ clearInterval(carrouselInterval);
 </script>
 
 <style scoped>
-/* CARROUSEL:BEGIN */
-
-
-
 .trending{
   display: flex;
   /* width: 100vh; */
 }
 
+/* CARROUSEL LIST:BEGIN */
+.carrousel-list-container{
+  max-width: 295px;
+    display: flex;
+    width: 100%;
+    background: #00000075;
+    border-radius: 25px;
+    margin-left: 5px;
+    border-left: solid 3px #0000006e;
+    border-bottom: solid 2px #0000006e;
+    flex-direction: column;
+    justify-content: center;  
+}
+
+.carrousel-list-container .list-item{
+  display: flex;
+    margin: 5px;
+    position: relative;
+    padding-top: 5px;
+    align-items: center;
+}
+
+.carrousel-list-container .list-item.selected{
+  border-radius: 10px;
+    background: #ffffff21;
+}
+
+.carrousel-list-container .list-item:hover{
+  cursor: pointer;
+    background: #8080803d;
+    border-radius: 10px;
+}
+
+.carrousel-list-container .list-item .number{
+  display: flex;
+  margin: 5px;
+    align-items: center;
+    font-weight: bold;
+    font-size: 35px;
+    justify-content: center;
+}
+
+.carrousel-list-container .list-item img{
+  display: flex;
+  height: 75px;
+  width: 50px;
+  border-radius: 5px;
+  border-left: solid 2px black;
+    border-bottom: solid 1px black;
+}
+
+.carrousel-list-container .list-item .info{
+  display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+}
+
+.carrousel-list-container .list-item .info .title{
+  display: flex;
+  font-weight: bold;
+}
+
+.carrousel-list-container .list-item .info .rating{
+  display: flex;
+  width: 100%;
+    justify-content: space-evenly;
+}
+
+
+.carrousel-list-container .list-item .info .rating .views{
+  display: flex;
+  align-items: center;
+}
+
+.carrousel-list-container .list-item .info .rating .stars{
+  display: flex;
+  align-items: center;
+}
+
+
+/* CARROUSEL LIST:END */
+
+/* CARROUSEL:BEGIN */
   .carrousel-container{
     display: flex;
     border-left: 5px solid #0000009c;
@@ -92,6 +198,10 @@ clearInterval(carrouselInterval);
     width: 800px;
     position: relative;
     overflow: hidden;
+  }
+
+  .carrousel-container:hover{
+    cursor: pointer;
   }
 
   .carrousel-container .options{
@@ -135,7 +245,7 @@ clearInterval(carrouselInterval);
 
   .carrousel-container .overlay .tags{
     display: flex;
-    margin-top: 40px;
+    margin-top: 0;
   }
 
   .carrousel-container .overlay .title{
