@@ -3,7 +3,7 @@ export default function useExampleData(){
         {
         id: 1,
         views: 100000,
-        stars: 4.5,
+        stars: 3.5,
         title: "Kimetsu No Yaiba",
         chapters: 130,
         description: "Tanjiro el cabezon que mata demonios con su hermana la cuero, y dos panas, El Rubito, un pana ma' palomo que el diablo que nama mete mano cuando se emborracha, y el maldito loco del jabali, un pana que se come lo hierro con cara de maricon. Los 4 tendran que pelear contra Maicol Jazon para que su hermana deje de ser cuero, con el patron con la respiracion de la bomba. Pila de pelea con machetes en san juan contra pila de Baka a las tres de la noche, ya tu sabe klk, le llega maldita yegua?",
@@ -57,8 +57,43 @@ export default function useExampleData(){
     },
 ];
 
+const continueReadingData = [
+    {
+        id: 1,
+        title: 'SOLO LEVELING',
+        chapter: 3,
+        pages: 26,
+        page: 4,
+        preview: '/src/assets/imgs/reading/sololeveling.jpg',
+    },
+    {
+        id: 2,
+        title: 'ONE PIECE',
+        chapter: 1,
+        pages: 20,
+        page: 1,
+        preview: '/src/assets/imgs/reading/onepiece.jpg',
+    },
+    {
+        id: 3,
+        title: 'COILING DRAGON',
+        chapter: 12,
+        pages: 34,
+        page: 16,
+        preview: '/src/assets/imgs/reading/coilingdragon.jpg',
+    },
+    {
+        id: 4,
+        title: 'DRAGON BALL SUPER',
+        chapter: 145,
+        pages: 34,
+        page:30,
+        preview: '/src/assets/imgs/reading/dragonball.jfif',
+    },
+];
 
     return{
-        trendingCarrouselData
+        trendingCarrouselData,
+        continueReadingData,
     };
 }

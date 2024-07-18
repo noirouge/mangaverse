@@ -18,9 +18,18 @@ interface ITrendingData{
     portrait: string;
     cover: string;
 };
+
+interface IReadingData{
+id: number;
+title: string;
+chapter: number;
+pages: number;
+page: number;
+preview: string;
+};
 const useMainStore = defineStore("useMainStore", () => {
 
-    const {trendingCarrouselData} = useExampleData();
+    const {trendingCarrouselData, continueReadingData} = useExampleData();
 
 
     const trendingData = ref<ITrendingData[]>([]);
@@ -31,23 +40,37 @@ const useMainStore = defineStore("useMainStore", () => {
         trendingDataSelected.value = trendingData.value[0];
     };
 
-    const cleanAllData = () => {
-        trendingData.value = [];
+    const getReadingData = async () => {
+        readingData.value = continueReadingData;
+        // readingDataSelected.value = readingData.value[0];
     };
-
+    
     const selectTrending = (index: number) => {
         trendingTurn.value = index;
         trendingDataSelected.value = trendingData.value[trendingTurn.value];
     };
-
-
+    
+    const readingData = ref<IReadingData[]>([]);
+    // const readingDataSelected = ref<IReadingData>();
+    
+    
+    const cleanAllData = () => {
+        trendingData.value = [];
+        trendingDataSelected.value = <any>{};
+        trendingTurn.value = 0;
+        readingData.value = [];
+        // readingDataSelected.value = <any>{};
+    };
 return{
     trendingData,
     trendingTurn,
     trendingDataSelected,
+    readingData,
+    // readingDataSelected,
     getTrendingData,
     cleanAllData,
     selectTrending,
+    getReadingData,
 };
 });
 
