@@ -7,6 +7,14 @@ name: string;
 color: string;
 }
 
+interface INewData{
+    id: number;
+    title: string;
+    chapter: number;
+    date: string;
+    portrait: string;
+}
+
 interface ITrendingData{
     id: number;
     views: number;
@@ -29,12 +37,15 @@ preview: string;
 };
 const useMainStore = defineStore("useMainStore", () => {
 
-    const {trendingCarrouselData, continueReadingData} = useExampleData();
+    const {trendingCarrouselData, continueReadingData, newChaptersData} = useExampleData();
 
 
     const trendingData = ref<ITrendingData[]>([]);
     const trendingDataSelected = ref<ITrendingData>(trendingData.value[0]);
     const trendingTurn = ref(0);
+    const readingData = ref<IReadingData[]>([]);
+    const newsData = ref<INewData[]>([]);
+
     const getTrendingData = async () => {
         trendingData.value = trendingCarrouselData;
         trendingDataSelected.value = trendingData.value[0];
@@ -44,14 +55,17 @@ const useMainStore = defineStore("useMainStore", () => {
         readingData.value = continueReadingData;
         // readingDataSelected.value = readingData.value[0];
     };
+
+    const getNewsData = async () => {
+        newsData.value = newChaptersData;
+    };
     
     const selectTrending = (index: number) => {
         trendingTurn.value = index;
         trendingDataSelected.value = trendingData.value[trendingTurn.value];
     };
     
-    const readingData = ref<IReadingData[]>([]);
-    // const readingDataSelected = ref<IReadingData>();
+    
     
     
     const cleanAllData = () => {
@@ -59,6 +73,7 @@ const useMainStore = defineStore("useMainStore", () => {
         trendingDataSelected.value = <any>{};
         trendingTurn.value = 0;
         readingData.value = [];
+        newsData.value = [];
         // readingDataSelected.value = <any>{};
     };
 return{
@@ -66,11 +81,13 @@ return{
     trendingTurn,
     trendingDataSelected,
     readingData,
+    newsData,
     // readingDataSelected,
     getTrendingData,
     cleanAllData,
     selectTrending,
     getReadingData,
+    getNewsData,
 };
 });
 

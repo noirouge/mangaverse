@@ -20,14 +20,6 @@
             </div>
         </div>
     </div>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-
-<h1>WAKA</h1>
 </template>
 
 <script setup lang="ts">
@@ -47,7 +39,7 @@ onMounted(() => {
 .preview-continue-reading{
     border-radius: 15px;
     display: flex;
-    height: 400px;
+    /* height: 400px; */
     justify-content: space-around;
 }
 

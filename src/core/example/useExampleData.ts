@@ -92,8 +92,124 @@ const continueReadingData = [
     },
 ];
 
+const newChaptersData = [
+    {
+      id: 1,
+      title: 'Dragon Ball',
+      chapter: 24,
+      date: '2024-07-18T14:46:01.773Z',
+      portrait: '/src/assets/imgs/portadas/dragon-ball.png',
+    },
+    {
+      id: 2,
+      title: 'Dragon Ball Super',
+      chapter: 10,
+      date: '2024-07-18T14:47:12.573Z',
+      portrait: '/src/assets/imgs/portadas/dragon-ball-super.webp',
+    },
+    {
+      id: 3,
+      title: 'Berserk',
+      chapter: 23,
+      date: '2024-07-18T14:48:24.921Z',
+      portrait: '/src/assets/imgs/portadas/berserk.jpg',
+    },
+    {
+      id: 4,
+      title: 'Coiling Dragon',
+      chapter: 5,
+      date: '2024-07-18T14:49:36.144Z',
+      portrait: '/src/assets/imgs/portadas/coiling-dragon.jpg',
+    },
+    {
+      id: 5,
+      title: 'DanMachi',
+      chapter: 18,
+      date: '2024-07-18T14:50:47.234Z',
+      portrait: '/src/assets/imgs/portadas/danmachi.webp',
+    },
+    {
+      id: 6,
+      title: 'Demon Slayer',
+      chapter: 15,
+      date: '2024-07-18T14:51:58.382Z',
+      portrait: '/src/assets/imgs/portadas/demon-slayer.jpg',
+    },
+    {
+      id: 7,
+      title: 'Tales of Demons and Gods',
+      chapter: 32,
+      date: '2024-07-18T14:53:09.497Z',
+      portrait: '/src/assets/imgs/portadas/demons-and-gods.jpg',
+    },
+    {
+      id: 8,
+      title: 'Fullmetal Alchemist',
+      chapter: 62,
+      date: '2024-07-18T14:54:20.692Z',
+      portrait: '/src/assets/imgs/portadas/fullmetal-alchemist.jpg',
+    },
+    {
+      id: 9,
+      title: 'Hunter x Hunter',
+      chapter: 30,
+      date: '2024-07-18T14:55:31.822Z',
+      portrait: '/src/assets/imgs/portadas/hxh.webp',
+    },
+    {
+      id: 10,
+      title: 'Naruto',
+      chapter: 72,
+      date: '2024-07-18T14:56:42.923Z',
+      portrait: '/src/assets/imgs/portadas/naruto.jpg',
+    },
+    {
+      id: 11,
+      title: 'One Piece',
+      chapter: 100,
+      date: '2024-07-18T14:57:54.067Z',
+      portrait: '/src/assets/imgs/portadas/one-piece.webp',
+    },
+    {
+      id: 12,
+      title: 'One Punch Man',
+      chapter: 28,
+      date: '2024-07-18T14:59:05.221Z',
+      portrait: '/src/assets/imgs/portadas/one-punch-man.webp',
+    },
+    {
+      id: 13,
+      title: 'Solo Leveling',
+      chapter: 110,
+      date: '2024-07-18T15:00:16.342Z',
+      portrait: '/src/assets/imgs/portadas/solo-leveling.webp',
+    },
+    {
+      id: 14,
+      title: 'Uzumaki',
+      chapter: 4,
+      date: '2024-07-18T15:01:27.458Z',
+      portrait: '/src/assets/imgs/portadas/uzumaki.jpg',
+    },
+    {
+      id: 15,
+      title: 'Vagabond',
+      chapter: 82,
+      date: '2024-07-18T15:02:38.612Z',
+      portrait: '/src/assets/imgs/portadas/vagabond.webp',
+    },
+    {
+      id: 16,
+      title: 'Vinland Saga',
+      chapter: 50,
+      date: '2024-07-18T15:03:49.753Z',
+      portrait: '/src/assets/imgs/portadas/vinland-saga.webp',
+    },
+  ];
+
     return{
         trendingCarrouselData,
         continueReadingData,
+        newChaptersData,
     };
 }

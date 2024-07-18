@@ -12,10 +12,19 @@
 }
 
   .main-title{
+    display: flex;
     margin-top: 25px;
     width: 100%;
+    font-weight: bold;
+    color: #ffff3f;
+    font-family: none;
+    fill: #ffff3f;
+    align-items: center;
   }
 
+  .main-title *{
+    margin-right: 5px;
+  }
   .main-content{
     width: 100%;
   }
