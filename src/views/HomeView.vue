@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import TrendingCarrousel from "../components/TrendingCarrousel.vue"
-import PreviewContinueReading from "../components/PreviewContinueReading.vue"
-import NewChapters from "../components/NewChapters.vue"
+import TrendingCarrousel from "@/components/TrendingCarrousel.vue"
+import PreviewContinueReading from "@/components/PreviewContinueReading.vue"
+import NewChapters from "@/components/NewChapters.vue"
 </script>
 
 <template>

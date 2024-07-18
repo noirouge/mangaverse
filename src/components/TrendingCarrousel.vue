@@ -61,7 +61,8 @@
 
 <script setup lang="ts">
 import { onMounted, reactive, ref, onUnmounted } from 'vue';
-import useMainStore from "@/stores/useMainStore.ts";
+// @ts-ignore
+import useMainStore from "@/stores/useMainStore.ts"; 
 import IconEye from '@/components/icons/IconEye.vue';
 import StarsHandler from '@/components/StarsHandler.vue';
 const mainStore = useMainStore();
