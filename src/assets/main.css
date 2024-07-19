@@ -1,0 +1,10 @@
+@import 'config.css';
+@import 'base.css';
+
+body{
+  background: linear-gradient(to bottom, #000000, #2F2E2E, #000000);
+  min-height: 97.89vh;
+  color: white;
+}
+
+
