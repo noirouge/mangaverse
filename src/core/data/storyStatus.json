@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "name": "On Going",
+        "color": "green"
+    },
+    {
+        "id": 2,
+        "name": "Finished",
+        "color": "red"
+    },
+    {
+        "id": 3,
+        "name": "Canceled",
+        "color": "orange"
+    }
+]

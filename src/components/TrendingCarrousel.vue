@@ -48,7 +48,7 @@
               <IconEye style="height: 15px; width: 15px;" /> {{ trending.views }}
             </div>
             <div class="stars">
-              <StarsHandler :stars="trending.stars" style="height: 15px; width: 15px;" />
+              <StarsHandler :stars="trending.stars"  />
             </div>
           </div>
         </div>

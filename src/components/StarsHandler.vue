@@ -1,8 +1,10 @@
 <template>
-    <div v-for="star, index of allStars" class="star" :key="index">
-        <IconStarFull v-if="star === 'full'" style="width: 100%; height: 100%;" />
-        <IconStarHalf v-else-if="star === 'half'" style="width: 100%; height: 100%;"/>
-        <IconStarEmpty  v-else-if="star === 'empty'" style="width: 100%; height: 100%;"/>
+    <div class="d-flex">
+        <div v-for="star, index of allStars" class="star" :key="index">
+            <IconStarFull v-if="star === 'full'" style="width: 100%; height: 100%;" />
+            <IconStarHalf v-else-if="star === 'half'" style="width: 100%; height: 100%;"/>
+            <IconStarEmpty  v-else-if="star === 'empty'" style="width: 100%; height: 100%;"/>
+        </div>
     </div>
 </template>
 

@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Manga",
+    "color": "blue",
+    "orientation": "horizontal"
+  },
+  {
+    "id": 2,
+    "name": "Manhua",
+    "color": "yellow",
+    "orientation": "vertical"
+  },
+  {
+    "id": 3,
+    "name": "Manwha",
+    "color": "green",
+    "orientation": "vertical"
+  }
+]

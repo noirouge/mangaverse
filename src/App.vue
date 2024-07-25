@@ -2,12 +2,22 @@
 import { RouterView } from 'vue-router'
 import NavBar from './core/layouts/NavBar.vue';
 import HomeView from './views/HomeView.vue';
+import { onMounted, inject } from 'vue';
+import { getFirestore, getDocs, collection } from 'firebase/firestore';
+import useDataStore from "@/stores/useDataStore";
+
+const dataStore = useDataStore();
+onMounted(async () => {
+ await dataStore.getMangas();
+ console.log("MOUNTED", dataStore.mangas);
+})
+
 </script>
 
 <template>
   <header>
  <NavBar />
   </header>
-  <HomeView />
-  <!-- <RouterView /> -->
+  <!-- <HomeView /> -->
+  <RouterView />
 </template>

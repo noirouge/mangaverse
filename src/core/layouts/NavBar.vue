@@ -7,8 +7,8 @@
                 <input class="my-search-input"  placeholder="Search Manga..."/>
             </div>
             <div class="my-nav-items">
-                <div class="my-nav-item selected">HOME</div>
-                <div class="my-nav-item">LIBRARY</div>
+                <router-link  to="/" class="my-nav-item selected">HOME</router-link>
+                <router-link to="/about" class="my-nav-item">LIBRARY</router-link>
                 <div class="my-nav-item">READING</div>
                 <div class="my-nav-item">MY LIST</div>
             </div>
@@ -27,6 +27,7 @@
 <script setup lang="ts">
 
 import {onMounted} from "vue";
+import { RouterLink } from "vue-router";
 
 onMounted(() => {
 console.log("HELLO NAVBAR");
