@@ -1,4 +1,4 @@
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, where, query } from "firebase/firestore";
 import { defineStore } from "pinia";
 import { inject, ref } from "vue";
 
@@ -10,8 +10,15 @@ export default defineStore("dataStore", () => {
     async function getMangas(){
         mangas.value = [];
 try{
-    const res = await getDocs(collection(db, "mangas"));
+    const q = query(collection(db, "mangas"), where("status", "==", "1"));
+    console.log("Q", q);
+    const res = await getDocs(q);
        res.forEach(doc => {
+        console.log("WAKA", doc.data());
+        // doc.data().genres.forEach((d:any) => {
+        //     console.log("WAKITA", d);
+
+        // });
         const docData = doc.data();
         mangas.value.push({id: doc.id, name: docData.name, cover: docData.cover})
        });
