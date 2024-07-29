@@ -76,6 +76,13 @@ const useMainStore = defineStore("useMainStore", () => {
         newsData.value = [];
         // readingDataSelected.value = <any>{};
     };
+
+
+    // VISITOR:BEGIN
+
+    //VISITOR:END
+
+
 return{
     trendingData,
     trendingTurn,

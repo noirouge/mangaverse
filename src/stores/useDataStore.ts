@@ -15,10 +15,6 @@ try{
     const res = await getDocs(q);
        res.forEach(doc => {
         console.log("WAKA", doc.data());
-        // doc.data().genres.forEach((d:any) => {
-        //     console.log("WAKITA", d);
-
-        // });
         const docData = doc.data();
         mangas.value.push({id: doc.id, name: docData.name, cover: docData.cover})
        });

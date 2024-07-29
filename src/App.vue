@@ -19,5 +19,7 @@ onMounted(async () => {
  <NavBar />
   </header>
   <!-- <HomeView /> -->
-  <RouterView />
+  <div class="container">
+    <RouterView />
+  </div>
 </template>
