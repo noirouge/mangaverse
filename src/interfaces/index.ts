@@ -1,29 +1,33 @@
 interface IBasicName {
+  id: string;
   name: string;
-};
+}
 
 interface IHandlerImg {
   src: string;
   base64: string;
-};
+  blob: Blob;
+}
 
-interface IMangas {
-  id: string;
+interface IManga {
+  id?: string;
   name: string;
   description: string;
-  genres: IBasicName[];
+  genres: string[];
   banner?: IHandlerImg;
-  banner64: string;
+//   banner64: string;
+  bannerUrl: string;
   year: number;
   cover?: IHandlerImg;
-  cover64: string;
+//   cover64: string;
+  coverUrl: string;
   type: number;
   demography: number;
   story_status: number;
   status: number;
   created_date: number;
   updated_date: number;
-};
+}
 
 interface IFullManga {
   id: string;
@@ -39,7 +43,7 @@ interface IFullManga {
   demography: number;
   story_status: number;
   chapters: number;
-};
+}
 
 interface IMangaTreending {
   id: string;
@@ -51,7 +55,7 @@ interface IMangaTreending {
   views: number;
   stars: number;
   chapters: number;
-};
+}
 
 interface IMangaStars {
   id: string;
@@ -59,7 +63,7 @@ interface IMangaStars {
   status: number;
   mangaId: number;
   userId: number;
-};
+}
 
 interface IMangaViews {
   id: string;
@@ -67,39 +71,40 @@ interface IMangaViews {
   mangaId: string;
   isVisitor: boolean;
   created_date: number;
-};
+}
 
 interface IMangaChapter {
   id: string;
   episode: number;
   photos: IChapterPhotos[];
-};
+}
 
 interface IChapterPhotos {
   id: string;
   order: number;
   base64: string;
-};
+}
 
-interface IContinueChapters{
-id: string;
-chapterId: string;
-mangaId: string;
-userId: string;
-created_date: number;
-updated_date: number;
-};
+interface IContinueChapters {
+  id: string;
+  chapterId: string;
+  mangaId: string;
+  userId: string;
+  created_date: number;
+  updated_date: number;
+}
 
-interface IVisitor{
-id: string;
-};
+interface IVisitor {
+  id: string;
+}
 
 export type {
-  IMangas,
+  IManga,
   IMangaTreending,
   IMangaChapter,
   IMangaViews,
   IMangaStars,
   IFullManga,
   IContinueChapters,
+  IBasicName,
 };

@@ -10,6 +10,7 @@ import router from './router'
 // FIREBASE:BEGIN
 import { initializeApp } from 'firebase/app';
 import { getFirestore, getDocs, collection } from 'firebase/firestore';
+import {getStorage} from 'firebase/storage';
 const firebaseConfig = {
   apiKey: "AIzaSyD5x3NHapl4oO4SQ5OgKqlJdSnRLCyvrP4",
   authDomain: "mangaversedb-api.firebaseapp.com",
@@ -23,6 +24,8 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 // Initialize Cloud Firestore and get a reference to the service
 const db = getFirestore(firebaseApp);
+// Initialize Firebase Storage and get a reference to the service
+const storage = getStorage(firebaseApp);
 //FIRABASE:END
 
 
@@ -30,6 +33,7 @@ const db = getFirestore(firebaseApp);
 const app = createApp(App)
 // app.config.globalProperties.$db = db;
 app.provide("db", db);
+app.provide("storage", storage);
 app.use(createPinia())
 app.use(router)
 

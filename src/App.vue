@@ -9,6 +9,7 @@ import useDataStore from "@/stores/useDataStore";
 const dataStore = useDataStore();
 onMounted(async () => {
  await dataStore.getMangas();
+ await dataStore.getCategories();
  console.log("MOUNTED", dataStore.mangas);
 })
 
