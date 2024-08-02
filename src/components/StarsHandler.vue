@@ -13,6 +13,7 @@ import IconStarFull from './icons/IconStarFull.vue';
 import IconStarEmpty from './icons/IconStarEmpty.vue';
 import IconStarHalf from './icons/IconStarHalf.vue';
 import { onMounted, defineProps, ref } from 'vue';
+import { watch } from 'fs';
 
 const props = defineProps({
     stars: {
@@ -21,25 +22,31 @@ const props = defineProps({
     }
 })
 
+
 type starTypes = "full" | "half" | "empty";
 
 const allStars = ref<starTypes[]>([])
 
-onMounted(() => {
-    console.log("STARS", props.stars,props.stars%1,props.stars - props.stars%1);
-    // props.stars.
+function getStars(){
+    // console.log("WAKA", props.stars%1);
     const starsINT = props.stars - props.stars%1;
     const isStarHalf = !!(props.stars%1);
-    console.log("ENTEROS", starsINT);
-    console.log("MITAD", isStarHalf);
-
     for(let i = 0; i < 5; i++){
         if(i < starsINT)allStars.value.push("full");
         else if(i === starsINT && isStarHalf)allStars.value.push("half");
         else allStars.value.push("empty");
     };
+};
 
-    console.log("FULL STARS", allStars.value);
+
+onMounted(() => {
+    // console.log("stars", props.stars);
+
+    // console.log("STARS", props.stars,props.stars%1,props.stars - props.stars%1);
+    // props.stars.
+    getStars();
+
+    // console.log("FULL STARS", allStars.value);
 
 })
 

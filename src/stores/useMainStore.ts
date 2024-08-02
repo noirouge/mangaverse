@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import useExampleData from "@/core/example/useExampleData";
+import useMangaStore from "./useMangaStore";
 
 interface ITrendingDataTag{
 name: string;
@@ -38,17 +39,17 @@ preview: string;
 const useMainStore = defineStore("useMainStore", () => {
 
     const {trendingCarrouselData, continueReadingData, newChaptersData} = useExampleData();
-
+    const mangaStore = useMangaStore();
 
     const trendingData = ref<ITrendingData[]>([]);
-    const trendingDataSelected = ref<ITrendingData>(trendingData.value[0]);
+    const trendingSelected = ref<string>('');
     const trendingTurn = ref(0);
     const readingData = ref<IReadingData[]>([]);
     const newsData = ref<INewData[]>([]);
 
     const getTrendingData = async () => {
         trendingData.value = trendingCarrouselData;
-        trendingDataSelected.value = trendingData.value[0];
+        // trendingDataSelected.value = trendingData.value[0];
     };
 
     const getReadingData = async () => {
@@ -62,7 +63,7 @@ const useMainStore = defineStore("useMainStore", () => {
     
     const selectTrending = (index: number) => {
         trendingTurn.value = index;
-        trendingDataSelected.value = trendingData.value[trendingTurn.value];
+        trendingSelected.value = mangaStore.mangasTreending[trendingTurn.value].manga_id;
     };
     
     
@@ -70,7 +71,7 @@ const useMainStore = defineStore("useMainStore", () => {
     
     const cleanAllData = () => {
         trendingData.value = [];
-        trendingDataSelected.value = <any>{};
+        trendingSelected.value = '';
         trendingTurn.value = 0;
         readingData.value = [];
         newsData.value = [];
@@ -86,7 +87,7 @@ const useMainStore = defineStore("useMainStore", () => {
 return{
     trendingData,
     trendingTurn,
-    trendingDataSelected,
+    trendingSelected,
     readingData,
     newsData,
     // readingDataSelected,

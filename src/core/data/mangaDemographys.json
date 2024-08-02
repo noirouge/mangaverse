@@ -1,6 +1,6 @@
 [
-    {"id": 1, "name": "Shonen"},
-    {"id": 1, "name": "Shojo"},
-    {"id": 1, "name": "Seinen"},
-    {"id": 1, "name": "Josei"}
+    {"id": 1, "name": "Shonen", "color": "orange"},
+    {"id": 1, "name": "Shojo", "color": "pink"},
+    {"id": 1, "name": "Seinen", "color": "red"},
+    {"id": 1, "name": "Josei", "color": "purple"}
 ]

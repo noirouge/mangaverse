@@ -2,18 +2,19 @@
 
   <div class="trending">
     <div class="carrousel-container">
-      <div v-for="trending of mainStore.trendingData" :key="trending.id" class="item"
-        v-show="trending.id === mainStore.trendingDataSelected.id">
+      <div v-for="trending of mangaStore.mangasTreending" :key="trending.manga_id" class="item"
+        v-show="trending.manga_id === mainStore.trendingSelected">
         <Transition name="slide-fade">
-          <img v-if="trending.id === mainStore.trendingDataSelected.id" :src="trending.cover" :alt="trending.title">
+          <img v-if="trending.manga_id === mainStore.trendingSelected" :src="trending.bannerUrl" :alt="trending.name">
         </Transition>
         <div class="overlay">
           <div class="tags">
-            <div v-for="tag of trending.tags" :key="tag.name" class="tag" :style="{ background: tag.color }">{{ tag.name
-              }}</div>
+            <div class="tag" :style="{background: getType(trending.type).color }">{{getType(trending.type).name }}</div>
+            <div class="tag" :style="{background: getDemography(trending.demography).color }">{{getDemography(trending.demography).name }}</div>
+            <div class="tag" :style="{background: getStatus(trending.story_status).color }">{{getStatus(trending.story_status).name }}</div>
           </div>
           <div class="title">
-            {{ trending.title }}
+            {{ trending.name }}
           </div>
           <div class="chapters">
             Chapters: {{ trending.chapters }}
@@ -26,33 +27,33 @@
 
       </div>
       <div class="options">
-        <div class="option" v-for="trending, index of mainStore.trendingData" :key="trending.id"
-          :class="{ active: trending.id === mainStore.trendingDataSelected.id }" @click="mainStore.selectTrending(index)">
+        <div class="option" v-for="trending, index of mangaStore.mangasTreending" :key="trending.manga_id"
+          :class="{ active: trending.manga_id === mainStore.trendingSelected }" @click="mainStore.selectTrending(index); carrouselInterval.refresh();">
         </div>
       </div>
     </div>
     <!-- <TrendingCarrouselList /> -->
     <div class="carrousel-list-container">
-      <div class="list-item" :class="{ selected: trending.id === mainStore.trendingDataSelected.id }"
-        v-for="trending, index of mainStore.trendingData" @click="mainStore.selectTrending(index)">
+      <div class="list-item" :class="{ selected: trending.manga_id === mainStore.trendingSelected }"
+        v-for="trending, index of mangaStore.mangasTreending" @click="mainStore.selectTrending(index); carrouselInterval.refresh();">
         <div class="number">
           {{ index + 1 }}
         </div>
-        <img :src="trending.portrait" :alt="trending.title + ' portrait'">
+        <img :src="trending.coverUrl??'/imgs/portadas/no-found.jpg'" :alt="trending.name + ' portrait'">
         <div class="info">
           <div class="title">
-            {{ trending.title }}
+            {{ trending.name }}
           </div>
           <div class="rating">
             <div class="views">
-              <IconEye style="height: 15px; width: 15px;" /> {{ trending.views }}
+              <IconEye style="height: 15px; width: 15px;" /> {{ trending.visite_ids.length }}
             </div>
             <div class="stars">
-              <StarsHandler :stars="trending.stars"  />
+              <StarsHandler v-if="trending.stars" :stars="trending.stars"  />
+              <StarsHandler v-else :stars="trending.stars"  />
             </div>
           </div>
         </div>
-        <!-- <div class="list-item-selected" v-if="trending.id === mainStore.trendingDataSelected.id"></div> -->
       </div>
 
     </div>
@@ -65,7 +66,27 @@ import { onMounted, reactive, ref, onUnmounted } from 'vue';
 import useMainStore from "@/stores/useMainStore.ts"; 
 import IconEye from '@/components/icons/IconEye.vue';
 import StarsHandler from '@/components/StarsHandler.vue';
+import useMangaStore from '@/stores/useMangaStore';
+import { mangaTypes, mangaDemographys, storyStatus } from '@/core/data';
 const mainStore = useMainStore();
+const mangaStore = useMangaStore();
+
+function getType(id:number){
+const res = mangaTypes.find(t => t.id == id);
+if(res) return res;
+else return {id: 0, name: '', color:'white', orientation: ''};
+};
+
+function getDemography(id:number){
+const res = mangaDemographys.find(t => t.id == id);
+if(res) return res;
+else return {id: 0, name: '', color:'white'};
+};
+function getStatus(id:number){
+const res = storyStatus.find(t => t.id == id);
+if(res) return res;
+else return {id: 0, name: '', color:'white'};
+};
 // function carrouselScroll(args:any){
 // console.log("carrouselScroll", args);
 // };
@@ -74,12 +95,13 @@ const mainStore = useMainStore();
 // }
 let carrouselInterval: any;
 function setCarouselInterval() {
-  carrouselInterval = setInterval(() => {
+carrouselInterval = setInterval(() => {
     if (mainStore.trendingTurn < 4) {
       mainStore.trendingTurn++;
     } else mainStore.trendingTurn = 0;
     mainStore.selectTrending(mainStore.trendingTurn);
   }, 5000);
+  
 };
 
 
@@ -163,7 +185,7 @@ onUnmounted(() => {
 }
 
 .carrousel-list-container .list-item .info .title {
-  max-width: 90%;
+  max-width: 95%;
   font-weight: bold;
   display: -webkit-box;
   -webkit-box-orient: vertical;

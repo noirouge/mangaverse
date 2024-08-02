@@ -46,16 +46,18 @@ interface IFullManga {
 }
 
 interface IMangaTreending {
-  id: string;
-  name: string;
-  description: string;
-  type: number;
-  demography: number;
-  story_status: number;
-  views: number;
-  stars: number;
-  chapters: number;
-}
+ manga_id: string;
+ visite_ids: string[];
+ stars: number;
+ name: string;
+ description: string;
+ type: number;
+ story_status: number;
+ demography: number;
+ bannerUrl: string;
+ coverUrl: string;
+ chapters: number;
+};
 
 interface IMangaStars {
   id: string;

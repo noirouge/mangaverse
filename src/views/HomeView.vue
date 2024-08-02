@@ -2,6 +2,14 @@
 import TrendingCarrousel from "@/components/TrendingCarrousel.vue"
 import PreviewContinueReading from "@/components/PreviewContinueReading.vue"
 import NewChapters from "@/components/NewChapters.vue"
+import useMangaStore from "@/stores/useMangaStore";
+import {onMounted} from 'vue'
+const mangaStore = useMangaStore();
+
+
+onMounted(async () => {
+await mangaStore.getTreendingMangas();
+});
 </script>
 
 <template>
